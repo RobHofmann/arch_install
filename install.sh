@@ -8,7 +8,7 @@ timedatectl set-ntp true
 # Partitioning
 sgdisk -Z ${DEVICE}
 sgdisk -o ${DEVICE}
-sgdisk -n 1:0:+256M -t 1:EF00 -c 1:EFI -n 2:0:+${SWAP_SIZE} -t 2:8200 -c 2:swap -n 3:0:0 -t 3:8300 -c 3:root ${DEVICE}
+sgdisk -n 1:0:+512M -t 1:EF00 -c 1:EFI -n 2:0:+${SWAP_SIZE} -t 2:8200 -c 2:swap -n 3:0:0 -t 3:8300 -c 3:root ${DEVICE}
 
 # Formatting
 mkfs.vfat -F32 -n EFI ${BOOT_PARTITION}
