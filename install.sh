@@ -1,5 +1,7 @@
 source $1
 
+export USERNAME=$2
+
 BTRFS_MOUNT_OPTS='noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async'
 
 # Connect to internet and set time
@@ -70,9 +72,9 @@ echo "Enter new password for user 'root'"
 arch-chroot /mnt passwd
 
 # User
-arch-chroot /mnt useradd -mUG wheel,audio,video,input,disk -s /bin/zsh michiel
-echo "Enter new password for user 'michiel'"
-arch-chroot /mnt passwd michiel
+arch-chroot /mnt useradd -mUG wheel,audio,video,input,disk -s /bin/zsh ${USERNAME}
+echo "Enter new password for user '${USERNAME}'"
+arch-chroot /mnt passwd ${USERNAME}
 echo "%wheel ALL=(ALL) ALL" > /mnt/etc/sudoers.d/wheel
 
 # Boot loader
